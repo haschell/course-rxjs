@@ -1,19 +1,20 @@
 import { displayLog } from './utils';
-import { of, interval, zip, Observable, from } from 'rxjs';
+import { of, range } from 'rxjs';
 
 export default () => {
     /** start coding */
 
-    const myArray = [1, 2, 3, 4, 5];
-    const myString = "Hello World";
-    const myPromise = new Promise(resolve => setTimeout(() => {
-        resolve('Hello World!');
-    }, 2000));
+    const source = of(1, 2, 3, 4, 5, 6);
+    const source2 = of(
+        [1, 2, 3],
+        "Hello World", { foo: "bar" },
+        function sayHello() {
+            return "Hi!";
+        }
+    );
 
-    const observable = from(myPromise);
-    const subscription = observable.subscribe(val => {
-        displayLog(val);
-    });
+    const source3 = range(3, 10);
+    const subscription = source3.subscribe(data => displayLog(data));
 
     /** end coding */
 }
